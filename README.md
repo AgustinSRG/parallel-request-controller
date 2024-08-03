@@ -32,10 +32,11 @@ Here is a list with all the available configuration variables for the server.
 
 ### General
 
-| Variable       | Description                                                                 |
-| -------------- | --------------------------------------------------------------------------- |
-| `PORT`         | The listening port for the server. By default: `8080`                       |
-| `BIND_ADDRESS` | Bind address for the server. By default it binds to all network interfaces. |
+| Variable       | Description                                                                   |
+| -------------- | ----------------------------------------------------------------------------- |
+| `PORT`         | The listening port for the server. By default: `8080`                         |
+| `BIND_ADDRESS` | Bind address for the server. By default it binds to all network interfaces.   |
+| `AUTH_TOKEN`   | Authentication token the clients must send in order to connect to the server. |
 
 ### TLS
 
