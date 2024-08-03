@@ -15,6 +15,9 @@ func main() {
 	SetDebugLogEnabled(GetEnvBool("LOG_DEBUG", false))
 	SetInfoLogEnabled(GetEnvBool("LOG_INFO", true))
 
+	// Setup request controller
+	requestController := CreateRequestController()
+
 	// Setup server
 	server := CreateHttpServer(HttpServerConfig{
 		Port:               GetEnvInt("PORT", 8080),
@@ -23,7 +26,7 @@ func main() {
 		TlsCertificateFile: GetEnvString("TLS_CERTIFICATE", ""),
 		TlsPrivateKeyFile:  GetEnvString("TLS_PRIVATE_KEY", ""),
 		AuthToken:          GetEnvString("AUTH_TOKEN", ""),
-	})
+	}, requestController)
 
 	// Run server
 

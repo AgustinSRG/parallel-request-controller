@@ -52,19 +52,23 @@ type HttpServer struct {
 
 	// Websocket connection upgrader
 	upgrader *websocket.Upgrader
+
+	// Request controller
+	requestController *RequestController
 }
 
 // Creates HTTP server
-func CreateHttpServer(config HttpServerConfig) *HttpServer {
+func CreateHttpServer(config HttpServerConfig, requestController *RequestController) *HttpServer {
 	if len(config.AuthToken) == 0 {
 		LogWarning("The variable AUTH_TOKEN is empty or not set. This variable is required for clients to authenticate. Please, set it before starting the server.")
 	}
 
 	return &HttpServer{
-		config:           config,
-		upgrader:         &websocket.Upgrader{},
-		mu:               &sync.Mutex{},
-		nextConnectionId: 0,
+		config:            config,
+		upgrader:          &websocket.Upgrader{},
+		mu:                &sync.Mutex{},
+		nextConnectionId:  0,
+		requestController: requestController,
 	}
 }
 
@@ -112,7 +116,7 @@ func (server *HttpServer) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		}
 
 		// Handle connection
-		ch := CreateConnectionHandler(c, server)
+		ch := CreateConnectionHandler(c, server, server.requestController)
 		go ch.Run()
 	} else {
 		w.WriteHeader(200)
