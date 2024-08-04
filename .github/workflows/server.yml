@@ -8,8 +8,7 @@ on:
     branches: [ "master" ]
     paths:
       - server/**
-      - client/**
-      - .github/workflows/go.yml
+      - .github/workflows/server.yml
   pull_request:
     branches: [ "master" ]
 
