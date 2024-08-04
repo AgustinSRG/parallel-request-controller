@@ -82,7 +82,17 @@ func (ch *ConnectionHandler) onClose() {
 
 	ch.mu.Unlock()
 
-	// TODO: Finish all pending requests
+	ch.ClearPendingRequests()
+}
+
+func (ch *ConnectionHandler) ClearPendingRequests() {
+	ch.muRequests.Lock()
+	defer ch.muRequests.Unlock()
+
+	for rId, rType := range ch.requests {
+		ch.requestController.EndRequest(rType)
+		delete(ch.requests, rId)
+	}
 }
 
 // Runs connection handler
