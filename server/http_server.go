@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"sync"
@@ -97,8 +98,8 @@ func (server *HttpServer) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	LogInfo("[HTTP] [FROM: " + ip + "] " + req.Method + " " + req.URL.Path)
 
-	if strings.HasPrefix(req.URL.Path, WS_PREFIX) && len(req.URL.Path) > len(WS_PREFIX) {
-		authToken := req.URL.Path[len(WS_PREFIX):]
+	if strings.HasPrefix(req.URL.Path, WS_PREFIX) {
+		authToken := getAuthTokenFromPath(req.URL.Path)
 
 		// Check auth token
 		if subtle.ConstantTimeCompare([]byte(server.config.AuthToken), []byte(authToken)) != 0 {
@@ -152,4 +153,31 @@ func (server *HttpServer) Run(wg *sync.WaitGroup) {
 			LogError(errHTTP, "Error starting HTTP server")
 		}
 	}
+}
+
+// Gets authentication token from PATH
+func getAuthTokenFromPath(path string) string {
+	if len(path) <= len(WS_PREFIX) {
+		return ""
+	}
+
+	authPart := path[len(WS_PREFIX):]
+
+	if len(authPart) == 0 {
+		return ""
+	}
+
+	authPartSplit := strings.Split(authPart, "/")
+
+	if len(authPartSplit) == 0 {
+		return ""
+	}
+
+	token, err := url.PathUnescape(authPartSplit[0])
+
+	if err != nil {
+		return ""
+	}
+
+	return token
 }
