@@ -68,7 +68,7 @@ The required arguments are:
 Example:
 
 ```
-START-REQUEST
+START-REQUEST-ACK
 Request-ID: 0001
 Request-Limit-Reached: FALSE
 ```
