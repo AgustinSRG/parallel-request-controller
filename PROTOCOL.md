@@ -112,6 +112,14 @@ The required arguments are:
  - `Request-Type` - An arbitrary string indicating the type of request.
  - `Request-Count` - Number of requests being handled in parallel at the moment.
 
+Example:
+
+```
+REQUEST-COUNT
+Request-Type: download-file0001-user0001
+Request-Count: 1
+```
+
 ### Error
 
 If an error happens, the server will send an `ERROR` message, with the details of the error in the arguments.
