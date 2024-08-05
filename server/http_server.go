@@ -102,8 +102,9 @@ func (server *HttpServer) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		authToken := getAuthTokenFromPath(req.URL.Path)
 
 		// Check auth token
-		if subtle.ConstantTimeCompare([]byte(server.config.AuthToken), []byte(authToken)) != 0 {
+		if subtle.ConstantTimeCompare([]byte(server.config.AuthToken), []byte(authToken)) != 1 {
 			w.WriteHeader(403)
+			LogDebug("[HTTP] [FROM: " + ip + "] [FORBIDDEN] " + req.Method + " " + req.URL.Path)
 			fmt.Fprint(w, "Forbidden.")
 			return
 		}
