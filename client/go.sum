@@ -1,0 +1,4 @@
+github.com/AgustinSRG/go-simple-rpc-message v1.0.1 h1:hCOdscFz+SfLM3C6UI8CqssE/czIMJfU0HL4Um3Krhs=
+github.com/AgustinSRG/go-simple-rpc-message v1.0.1/go.mod h1:AXNiixxVqEZRfWPX+d0lPEcX4U8+HjTsYeZIzZOcVAY=
+github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
+github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
