@@ -240,7 +240,7 @@ func (conn *Connection) readIncomingMessages(socket *websocket.Conn) {
 		err := socket.SetReadDeadline(time.Now().Add(HEARTBEAT_MSG_PERIOD_SECONDS * 2 * time.Second))
 
 		if err != nil {
-			if conn.config.ErrorHandler != nil {
+			if !conn.IsClosed() && conn.config.ErrorHandler != nil {
 				conn.config.ErrorHandler.OnConnectionError(err)
 			}
 			return
@@ -249,7 +249,7 @@ func (conn *Connection) readIncomingMessages(socket *websocket.Conn) {
 		mt, message, err := socket.ReadMessage()
 
 		if err != nil {
-			if conn.config.ErrorHandler != nil {
+			if !conn.IsClosed() && conn.config.ErrorHandler != nil {
 				conn.config.ErrorHandler.OnConnectionError(err)
 			}
 			return

@@ -30,7 +30,7 @@ func main() {
 
     // For this example, we use a mock server to illustrate the request handling
     server := createServerSomehow(func (req *Request) *Response {
-        // We call StartRequest in order to ensure the request limit was not reached 
+        // We call StartRequest in order to ensure the request limit was not reached
         prcRef, limited, err := prc_client.StartRequest(request.req_type, MAX_PARALLEL_REQUESTS)
 
         if err != nil {
@@ -60,3 +60,18 @@ func main() {
 ## Documentation
 
 - https://pkg.go.dev/github.com/AgustinSRG/parallel-request-controller/client
+
+## Testing
+
+In order to test the library, first, make sure to start a [Parallel Request Controller Server](../server/). Also, set the following env variables:
+
+| Variable     | Description                                |
+| ------------ | ------------------------------------------ |
+| `SERVER_URL` | Server URL. Default: `ws://localhost:8080` |
+| `AUTH_TOKEN` | Authentication token                       |
+
+Then, run:
+
+```sh
+go test -v
+```
