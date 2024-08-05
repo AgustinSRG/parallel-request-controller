@@ -110,7 +110,7 @@ When the server receives a `GET-REQUEST-COUNT` message, it will respond with a `
 The required arguments are:
 
  - `Request-Type` - An arbitrary string indicating the type of request.
- - `Request-Count` - Number of requests being handled in parallel at the moment.ç
+ - `Request-Count` - Number of requests being handled in parallel at the moment.
 
 ### Error
 
