@@ -347,7 +347,7 @@ export class PRCConnection {
      */
     private receiveRequestCount(msg: WebsocketMessage) {
         const rType = getMessageParam(msg, "Request-Type");
-        const count = parseInt(getMessageParam(msg, "Request-Type"), 10);
+        const count = parseInt(getMessageParam(msg, "Request-Count"), 10);
 
         if (isNaN(count)) {
             if (this.config.onServerError) {
