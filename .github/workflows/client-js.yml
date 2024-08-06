@@ -47,3 +47,5 @@ jobs:
     - name: Run tests
       working-directory: ./client-js
       run: npm test
+      env:
+        AUTH_TOKEN: 'secret'
