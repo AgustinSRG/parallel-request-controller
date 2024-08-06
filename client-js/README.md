@@ -80,7 +80,7 @@ async function handleRequest(request, response) {
 
 ## Documentation
 
-- TODO: Add link to GitHub pages
+- https://agustinsrg.github.io/parallel-request-controller/client-js/docs
 
 ## Building source code
 
