@@ -1,6 +1,6 @@
 ## Build golang modules ###
 
-FROM golang:latest
+FROM golang:alpine
 
 WORKDIR /root
 
