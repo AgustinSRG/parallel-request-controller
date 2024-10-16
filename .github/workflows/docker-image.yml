@@ -1,4 +1,4 @@
-name: Docker Image CI (Docker Hub)
+name: Docker Image CI
 
 on:
   release:
@@ -131,7 +131,13 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag image with GHCR registry
-        run: docker tag ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }} ${{ env.GHCR_IMAGE }}:${{ steps.meta.outputs.version }} ${{ env.GHCR_IMAGE }}:latest
+        run: docker tag ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }} ${{ env.GHCR_IMAGE }}:${{ steps.meta.outputs.version }}
+
+      - name: Tag image with GHCR registry (latest)
+        run: docker tag ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }} ${{ env.GHCR_IMAGE }}:latest
 
       - name: Push image
-        run: docker push ${{ env.GHCR_IMAGE }}:${{ steps.meta.outputs.version }} && docker push ${{ env.GHCR_IMAGE }}:latest
+        run: docker push ${{ env.GHCR_IMAGE }}:${{ steps.meta.outputs.version }}
+      
+      - name: Push image (latest)
+        run: docker push ${{ env.GHCR_IMAGE }}:latest
